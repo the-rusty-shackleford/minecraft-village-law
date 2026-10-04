@@ -1,0 +1,41 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="AGPL-3.0-or-later"
+[[mods]]
+modId="villagelaw"
+version="${version}"
+displayName="Village Law"
+authors="Rusty Shackleford and nfx"
+description='''Village guards keep the law the way Skyrim's do. A guard who sees a crime runs over and offers a choice: pay the fine, or leave and stay away for two days. Built on Thief's crimes and Guard Villagers' guards.'''
+[[mixins]]
+config="villagelaw.mixins.json"
+[[dependencies.villagelaw]]
+modId="neoforge"
+type="required"
+versionRange="[21.1.248,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.villagelaw]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1]"
+ordering="NONE"
+side="BOTH"
+[[dependencies.villagelaw]]
+modId="thief"
+type="required"
+versionRange="[1.2,)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.villagelaw]]
+modId="villagedeed"
+type="required"
+versionRange="[2.2,)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.villagelaw]]
+modId="guardvillagers"
+type="optional"
+versionRange="[2.4,)"
+ordering="AFTER"
+side="BOTH"
