@@ -1,7 +1,13 @@
 # Village Law
 
-**1.0.0, built and verified 2026-10-04; not yet released.** Rusty's word on 2026-10-04 was to ship
-it together with Ranged Weapons Mod 2.12.0 as pack 1.72.0 once it is done. Gate:
+**1.0.0, built, verified and released 2026-10-04 in pack 1.72.0** with Ranged Weapons Mod 2.12.0,
+on Rusty's "no batch everything together when done". Public at
+github.com/the-rusty-shackleford/minecraft-village-law (tag `v1.0.0`, asset sha1 `88dc3310`,
+matched on download and on the server). Restarted at once with nobody on: 38 baseline errors,
+20 TPS, parity clean, `config/villagelaw-server.toml` written with the defaults. A real guard in
+the CTOV village at -1264, -1040, force-loaded with nobody on, read a speed base of 0.45069: its
+saved 0.5 was corrected as it loaded. The server repo's `knowledge/releases/pack-1.72.0.md` has the
+deployment. Not yet seen: a case in live play. Gate:
 [release verification](../devtools/verification/release-1.0.0.md) (38 JUnit, 11 GameTests,
 8 mutations caught, 19 booth checks, a guard's chase measured at a sprint).
 
@@ -50,8 +56,5 @@ player. Guards and golems are held back while a case is peaceful, and guards cha
 
 ## Next
 
-- Release with Ranged Weapons Mod 2.12.0 as pack 1.72.0 (needs a GitHub repo:
-  `the-rusty-shackleford/minecraft-village-law`).
-- After the deploy, read a guard's speed base on the box with `/attribute` (0.4507), and watch
-  the log for the first case.
+- Watch the box's log for the first `Village Law:` case, and ask Rusty how the first summons felt.
 - Serfdom (part C of the plan) listens to `CaseSettledEvent`.
