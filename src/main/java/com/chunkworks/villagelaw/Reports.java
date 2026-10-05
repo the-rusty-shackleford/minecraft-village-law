@@ -34,8 +34,9 @@ public final class Reports {
     private static boolean answer;
     private Reports() {}
 
-    /** effects: the village the position lies in, else the nearest within {@link #NEAR}. */
-    static Optional<Village> villageAround(ServerLevel level, BlockPos pos) {
+    /** effects: the village the position lies in, else the nearest within {@link #NEAR}. Public for
+     * {@link com.chunkworks.villagelaw.api.Cases}. */
+    public static Optional<Village> villageAround(ServerLevel level, BlockPos pos) {
         return VillageProviders.at(level, pos).or(() -> VillageProviders.near(level, pos, NEAR));
     }
     /** effects: the nearest live officer among the witnesses, or null. */

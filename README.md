@@ -85,6 +85,12 @@ Which crimes open a case is Thief's `guard_attack_threshold` in `thief-server.to
 `PAID`, or `FLED` at the moment a banishment begins. One case can settle `FLED` and then `PAID`.
 Serfdom uses it to free a captured villager.
 
+`com.chunkworks.villagelaw.api.Cases.openHere(player)` (1.1.0) names the village the law places
+the player's crimes in where they stand (the village there, else the nearest within 16 blocks),
+when they have an open case with it. A mod asks it right after committing a crime through Thief
+to learn which case the crime joined, if any: Serfdom owes a capture to that case, so paying it
+frees the captive and nothing else does.
+
 ## Diagnosing
 
 - Every state change is logged: `Village Law: <player>'s case with <village> (<id>): WANTED ->

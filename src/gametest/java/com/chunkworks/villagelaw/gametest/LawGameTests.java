@@ -12,6 +12,7 @@ import com.chunkworks.villagelaw.Patrol;
 import com.chunkworks.villagelaw.Reports;
 import com.chunkworks.villagelaw.Summons;
 import com.chunkworks.villagelaw.api.CaseSettledEvent;
+import com.chunkworks.villagelaw.api.Cases;
 import com.chunkworks.villagelaw.domain.Case;
 import com.chunkworks.villagelaw.domain.Chase;
 import com.chunkworks.villagelaw.domain.Severity;
@@ -96,6 +97,7 @@ public final class LawGameTests {
             var e = entry(thief, v);
             h.assertTrue(e != null && e.lawCase().equals(Case.opened(Severity.MEDIUM, 8)), "a WANTED case fined 8: " + e);
             h.assertTrue(Summons.officerFor(thief.getUUID(), v.id()).equals(Optional.of(guard.getUUID())), "the guard who saw it carries the summons");
+            h.assertTrue(Cases.openHere(thief).equals(Optional.of(v.id())), "the API names the village of the open case: " + Cases.openHere(thief));
         }).thenWaitUntil(() -> {
             var now = entry(thief, v);
             h.assertTrue(now != null && now.lawCase().state() == Case.State.SUMMONED, "served: " + now);
@@ -145,8 +147,10 @@ public final class LawGameTests {
             for (var who : List.of(payer.getUUID(), other)) { grudge(villager.getGossips(), who); grudge(guard.getGossips(), who); }
             var e = summoned(payer, v, Severity.MEDIUM, guard);
             h.assertTrue(e.lawCase().state() == Case.State.SUMMONED && Wallets.worth(payer) == 12, "summoned, carrying 12 in the bag: " + e);
+            h.assertTrue(Cases.openHere(payer).equals(Optional.of(v.id())), "open while summoned");
             Summons.answer(payer, new Summons.Answer(v.id().toString(), Summons.Choice.PAY));
             h.assertTrue(entry(payer, v) == null, "the case is closed");
+            h.assertTrue(Cases.openHere(payer).isEmpty(), "and the API says no case is open");
             h.assertTrue(Wallets.worth(payer) == 4, "eight taken, four back as change: " + Wallets.worth(payer));
             h.assertTrue(Settlements.of(payer.getUUID()).equals(List.of(new Settlements.Seen(payer.getUUID(), v.id().toString(), CaseSettledEvent.Settlement.PAID, 8))), "settled PAID: " + Settlements.of(payer.getUUID()));
             h.assertTrue(villager.getPlayerReputation(payer) == 0 && guard.getPlayerReputation(payer) == 0, "the payer is forgiven: " + villager.getPlayerReputation(payer) + ", " + guard.getPlayerReputation(payer));
@@ -252,7 +256,7 @@ public final class LawGameTests {
             var v = village(h, hut);
             h.assertTrue(Claims.get(h.getLevel()).claim(new Claims.Claim(v.id(), v.name(), Deed.of(owner.getUUID()), Map.of(owner.getUUID(), "owner"), v.centre(), 15, now(h))), "the owner holds the deed");
             h.assertTrue(owner.gameMode.destroyBlock(hut.at(2, 1, 1)), "the owner breaks a chest");
-            h.assertTrue(Crimes.by(owner.getUUID()).isEmpty() && entry(owner, v) == null, "no crime and no case");
+            h.assertTrue(Crimes.by(owner.getUUID()).isEmpty() && entry(owner, v) == null && Cases.openHere(owner).isEmpty(), "no crime and no case");
             h.assertTrue(stranger.gameMode.destroyBlock(hut.at(2, 1, 3)), "the stranger breaks a chest");
             h.assertTrue(entry(stranger, v) != null, "the stranger has a case");
         }).thenExecuteFor(40, () -> h.assertFalse(guard.getTarget() == owner, "the guard leaves the owner be")).thenSucceed();
@@ -271,6 +275,7 @@ public final class LawGameTests {
             h.assertTrue(seen.size() == 1 && seen.get(0).crime() == Crime.MEDIUM && seen.get(0).witnesses() == 1, "Thief's medium crime, one witness: " + seen);
             h.assertTrue(villager.getPlayerReputation(thief) == -50, "Thief's reputation hit: " + villager.getPlayerReputation(thief));
             h.assertTrue(entry(thief, village(h, hut)) == null, "no case");
+            h.assertTrue(Cases.openHere(thief).isEmpty(), "and the API names none");
         }).thenSucceed();
     }
 
