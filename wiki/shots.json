@@ -1,0 +1,8 @@
+{
+  "shots": [
+    {"from": "run/booth/screenshots/villagelaw-01-summons.png", "to": "img/summons-guard.webp"},
+    {"from": "run/booth/screenshots/villagelaw-01-summons.png", "to": "img/summons.webp", "crop": [405, 413, 875, 595], "screen": true},
+    {"from": "run/booth/screenshots/villagelaw-02-countdown.png", "to": "img/countdown.webp"},
+    {"from": "run/booth/screenshots/villagelaw-04-debt-short.png", "to": "img/debt.webp", "crop": [405, 413, 875, 595], "screen": true}
+  ]
+}
