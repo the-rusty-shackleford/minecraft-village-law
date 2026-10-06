@@ -1,13 +1,15 @@
 # Village Law
 
-**1.1.0, built 2026-10-04, not released.** One public read for Serfdom's phase 2a (its D-0003):
+**1.1.0, released 2026-10-06 in pack 1.73.0** with Serfdom 0.8.0 and Vanilla Wheels 1.11.0, on
+Rusty's go ("release all three"), from the 2026-10-04 gate's jar: tag `v1.1.0`, sha1 `0c244139` on
+GitHub and on the server (the server repo's `knowledge/releases/pack-1.73.0.md`). Not yet seen: a
+capture's case paid in live play. One public read for Serfdom's phase 2a (its D-0003):
 `api/Cases.openHere(player)`, the village whose open case the player's crime where they stand
 belongs to; `Reports.villageAround` became public for it. Nothing else changed. Its checks ride
 in four existing GameTests (open after a guard saw a theft, open while summoned and closed once
 paid, none when only a villager saw, none for a deed owner). Gate (`./gradlew clean build`,
 2026-10-04): 38 JUnit, 11 GameTests, the booth's 19 checks, jar sha1 `0c244139`. Both ways to
-break it (never open, always open) were run and caught. It ships with Serfdom 0.3.0 and Vanilla
-Wheels 1.11.0, on Rusty's go.
+break it (never open, always open) were run and caught.
 
 **1.0.0, built, verified and released 2026-10-04 in pack 1.72.0** with Ranged Weapons Mod 2.12.0,
 on Rusty's "no batch everything together when done". Public at
